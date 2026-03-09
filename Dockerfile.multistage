@@ -1,6 +1,5 @@
-# I will take the base image only for the required task
-
-#Stage 1 (builder)
+# I will take the base image only for the required task (119mb)
+# Stage 1 (builder) 
 
 FROM python:3.14-slim AS builder
 
@@ -10,14 +9,12 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt --target /app/libraries
 
-# Python 3.14 ka kam idhar khtam ho chuka hai, kyunki mujhe python se jo bhi chahiye
-# vo /app/libraries me rakaha hua hai
+# Python 3.14 ka kaam idhar tak khatam ho chuka hai kyunki mujhe python se jo bhi chahiye vo /app/libraries me##rakha hua hai
 
 COPY . .
 
 # I will take another base image with even lesser size (minimal)
-
-#Stage 2 (deployer)
+# Stage 2 (deployer)
 
 FROM gcr.io/distroless/python3-debian12 AS deployer
 
