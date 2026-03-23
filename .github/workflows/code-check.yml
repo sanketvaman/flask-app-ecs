@@ -8,16 +8,19 @@ jobs:
   linter:
   #server
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11","3.12","3.13"]
 
     steps:
     # get the latest code on that server
       - name: Checkout code
         uses: actions/checkout@v4
         
-      - name: Setup Python 3.12
+      - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python-version }}
 
       - name: install linter flake 8
         run: pip install flake8
